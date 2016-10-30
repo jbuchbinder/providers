@@ -71,7 +71,7 @@ func (p Provider) Login(d *core.Downloader) {
 }
 
 func login(client *http.Client, id string, pw string) (*http.Cookie, error) {
-	reader := strings.NewReader(fmt.Sprintf("id=%s&pw=%s", id, pw))
+	reader := strings.NewReader(fmt.Sprintf("id=%s&pw=%s", url.QueryEscape(id), url.QueryEscape(pw)))
 	u, _ := url.Parse("https://uploaded.net/io/login")
 	req, _ := http.NewRequest("POST", u.String(), reader)
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
